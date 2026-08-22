@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>気休めスロット</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<main class="game">
+
+
+    <!-- =========================
+         上部情報
+    ========================== -->
+
+    <div class="top-bar">
+
+        <div class="coin-area">
+            💰 <span id="coins">0</span>
+        </div>
+
+        <div class="free-spin">
+            🎁 無料SPIN：
+            <span id="freeSpins">3</span>回
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         スロット
+    ========================== -->
+
+    <section
+        id="slotScreen"
+        class="screen active"
+    >
+
+        <h1>🎰 気休めスロット</h1>
+
+
+        <div class="machine">
+
+            <div class="reels">
+
+                <div class="reel" id="reel1">
+                    🍒
+                </div>
+
+                <div class="reel" id="reel2">
+                    🍋
+                </div>
+
+                <div class="reel" id="reel3">
+                    ⭐
+                </div>
+
+            </div>
+
+
+            <div
+                class="result"
+                id="result"
+            >
+                SPINしてみよう！
+            </div>
+
+        </div>
+
+
+        <button id="spinButton">
+            SPIN
+        </button>
+
+
+        <div class="info">
+            1回 <span id="spinCostText">50コイン</span>
+        </div>
+
+
+        <div class="best">
+            最高コイン：
+            <span id="bestCoins">0</span>
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ミニゲーム
+    ========================== -->
+
+    <section
+        id="gameScreen"
+        class="screen"
+    >
+
+        <h1>🎮 ミニゲーム</h1>
+
+
+        <div class="minigame-card">
+
+            <div class="game-title">
+                🎯 タイミングストップ
+            </div>
+
+
+            <p class="game-description">
+                動いているカーソルを<br>
+                緑のゾーンで止めよう！
+            </p>
+
+
+            <div class="daily-free">
+
+                🎁 今日の無料プレイ：
+                <span id="dailyFreeStatus">
+                    使用可能
+                </span>
+
+            </div>
+
+
+            <div
+                id="gameStartArea"
+                class="game-area"
+            >
+
+                <div class="game-icon">
+                    🎯
+                </div>
+
+
+                <div
+                    id="gameCostText"
+                    class="game-cost"
+                >
+                    無料でプレイできます！
+                </div>
+
+
+                <button
+                    id="startGameButton"
+                    class="game-button"
+                >
+                    START
+                </button>
+
+            </div>
+
+
+
+            <div
+                id="gamePlayArea"
+                class="game-area hidden"
+            >
+
+                <div class="timing-bar">
+
+                    <div
+                        id="perfectZone"
+                        class="perfect-zone"
+                    ></div>
+
+                    <div
+                        id="cursor"
+                        class="cursor"
+                    ></div>
+
+                </div>
+
+
+                <div class="game-message">
+                    緑のゾーンでSTOP！
+                </div>
+
+
+                <button
+                    id="stopGameButton"
+                    class="game-button stop-button"
+                >
+                    STOP
+                </button>
+
+            </div>
+
+
+
+            <div
+                id="gameResultArea"
+                class="game-area hidden"
+            >
+
+                <div
+                    id="gameResult"
+                    class="game-result"
+                >
+                    GREAT!
+                </div>
+
+
+                <div
+                    id="gameReward"
+                    class="game-reward"
+                >
+                    +30コイン
+                </div>
+
+
+                <button
+                    id="retryGameButton"
+                    class="game-button"
+                >
+                    もう一回
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="game-stats">
+            🎮 ミニゲーム累計獲得コイン
+            <span id="miniGameCoins">0</span>
+        </div>
+
+
+        <div class="game-stats">
+            🏆 ミニゲーム最高記録
+            <span id="miniGameBest">0</span>
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         バフ
+    ========================== -->
+
+    <section
+        id="buffScreen"
+        class="screen"
+    >
+
+        <h1>⚡ バフ</h1>
+
+
+        <div class="buff-header">
+
+            <div>
+                装備枠
+            </div>
+
+            <div>
+                <span id="equippedCount">0</span>
+                / 2
+            </div>
+
+        </div>
+
+
+        <p class="buff-explanation">
+            バフは購入しただけでは効果がありません。<br>
+            装備したバフだけが発動します。
+        </p>
+
+
+        <!-- 装備中 -->
+
+        <div class="buff-section">
+
+            <h2>
+                ⚡ 装備中
+            </h2>
+
+            <div
+                id="equippedBuffs"
+                class="equipped-buffs"
+            >
+            </div>
+
+        </div>
+
+
+
+        <!-- バフショップ -->
+
+        <div class="buff-section">
+
+            <h2>
+                🛒 バフショップ
+            </h2>
+
+
+            <div id="buffList"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         設定
+    ========================== -->
+
+    <section
+        id="settingsScreen"
+        class="screen"
+    >
+
+        <h1>⚙️ 設定</h1>
+
+
+        <div class="settings-panel">
+
+            <h2>
+                📊 ゲーム情報
+            </h2>
+
+
+            <div class="setting-info">
+                <span>💰 現在のコイン</span>
+                <span id="settingsCoins">0</span>
+            </div>
+
+
+            <div class="setting-info">
+                <span>🏆 最高コイン</span>
+                <span id="settingsBestCoins">0</span>
+            </div>
+
+
+            <div class="setting-info">
+                <span>🎯 ミニゲーム累計</span>
+                <span id="settingsMiniGameCoins">0</span>
+            </div>
+
+
+            <div class="setting-info">
+                <span>🏆 ミニゲーム最高</span>
+                <span id="settingsMiniGameBest">0</span>
+            </div>
+
+        </div>
+
+
+
+        <div class="settings-panel">
+
+            <h2>
+                🗑️ ゲームデータ
+            </h2>
+
+
+            <button
+                id="resetDataButton"
+                class="setting-button danger"
+            >
+                🔄 データをリセット
+
+                <span>
+                    コイン・記録などを初期化
+                </span>
+            </button>
+
+
+            <button
+                id="restartGameButton"
+                class="setting-button restart"
+            >
+                🆕 最初からやり直す
+
+                <span>
+                    すべてのゲームデータを削除
+                </span>
+            </button>
+
+        </div>
+
+
+
+        <div class="settings-panel">
+
+            <h2>
+                その他
+            </h2>
+
+
+            <div class="setting-info">
+
+                <span>
+                    🎰 気休めスロット
+                </span>
+
+                <span>
+                    Version 1.1
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ナビゲーション
+    ========================== -->
+
+    <nav class="navigation">
+
+
+        <button
+            class="nav-button active"
+            data-screen="slotScreen"
+        >
+            <span class="nav-icon">🎰</span>
+            <span>スロット</span>
+        </button>
+
+
+        <button
+            class="nav-button"
+            data-screen="gameScreen"
+        >
+            <span class="nav-icon">🎮</span>
+            <span>ゲーム</span>
+        </button>
+
+
+        <button
+            class="nav-button"
+            data-screen="buffScreen"
+        >
+            <span class="nav-icon">⚡</span>
+            <span>バフ</span>
+        </button>
+
+
+        <button
+            class="nav-button"
+            data-screen="settingsScreen"
+        >
+            <span class="nav-icon">⚙️</span>
+            <span>設定</span>
+        </button>
+
+
+    </nav>
+
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
