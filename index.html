@@ -2,30 +2,31 @@
 <html lang="ja">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        content="width=device-width, initial-scale=1.0"
     >
 
     <title>気休めスロット</title>
 
-    <link rel="stylesheet" href="style.css">
-
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 
 <body>
 
 
-<main class="game">
+<div class="game">
 
 
-    <!-- =========================
-         上部情報
-    ========================== -->
+    <!-- =========================================
+         共通ヘッダー
+    ========================================== -->
 
     <div class="top-bar">
 
@@ -35,38 +36,46 @@
 
         <div class="free-spin">
             🎁 無料SPIN：
-            <span id="freeSpins">3</span>回
+            <span id="freeSpins">3</span>
         </div>
 
     </div>
 
 
+    <h1>🎰 気休めスロット</h1>
 
-    <!-- =========================
-         スロット
-    ========================== -->
+
+    <!-- =========================================
+         スロット画面
+    ========================================== -->
 
     <section
         id="slotScreen"
         class="screen active"
     >
 
-        <h1>🎰 気休めスロット</h1>
-
-
         <div class="machine">
 
             <div class="reels">
 
-                <div class="reel" id="reel1">
+                <div
+                    id="reel1"
+                    class="reel"
+                >
                     🍒
                 </div>
 
-                <div class="reel" id="reel2">
+                <div
+                    id="reel2"
+                    class="reel"
+                >
                     🍋
                 </div>
 
-                <div class="reel" id="reel3">
+                <div
+                    id="reel3"
+                    class="reel"
+                >
                     ⭐
                 </div>
 
@@ -74,90 +83,1253 @@
 
 
             <div
-                class="result"
                 id="result"
+                class="result"
             >
-                SPINしてみよう！
+                START！
             </div>
 
-        </div>
+
+            <button id="spinButton">
+                SPIN
+            </button>
 
 
-        <button id="spinButton">
-            SPIN
-        </button>
+            <div class="info">
+
+                1回
+                <strong>
+                    <span id="spinCostText">50</span>
+                </strong>
+                コイン
+
+            </div>
 
 
-        <div class="info">
-            1回 <span id="spinCostText">50コイン</span>
-        </div>
+            <div class="best">
 
+                🏆 最高コイン：
+                <span id="bestCoins">0</span>
 
-        <div class="best">
-            最高コイン：
-            <span id="bestCoins">0</span>
+            </div>
+
         </div>
 
     </section>
 
 
 
-    <!-- =========================
-         ミニゲーム
-    ========================== -->
+    <!-- =========================================
+         ミニゲーム画面
+    ========================================== -->
 
     <section
-        id="gameScreen"
+        id="miniGameScreen"
         class="screen"
     >
 
-        <h1>🎮 ミニゲーム</h1>
+        <div class="minigame-tabs">
+
+            <button
+                class="minigame-tab active"
+                data-game="timingGame"
+            >
+                🎯
+                <span>タイミング</span>
+            </button>
+
+            <button
+                class="minigame-tab"
+                data-game="highLowGame"
+            >
+                🃏
+                <span>ハイ＆ロー</span>
+            </button>
+
+            <button
+                class="minigame-tab"
+                data-game="memoryGame"
+            >
+                🧠
+                <span>数字記憶</span>
+            </button>
+
+        </div>
 
 
-        <div class="minigame-card">
+        <!-- ==============================
+             タイミングゲーム
+        =============================== -->
 
-            <div class="game-title">
-                🎯 タイミングストップ
+        <div
+            id="timingGame"
+            class="minigame-content active"
+        >
+
+            <div class="minigame-card">
+
+                <div class="game-title">
+                    🎯 タイミングストップ
+                </div>
+
+                <div class="game-description">
+                    動くバーを中央のゾーンで止めよう！
+                </div>
+
+
+                <div class="daily-free">
+
+                    今日の無料プレイ：
+                    <strong id="dailyFreeStatus">
+                        使用可能
+                    </strong>
+
+                </div>
+
+
+                <div
+                    id="gameStartArea"
+                    class="game-area"
+                >
+
+                    <div class="game-icon">
+                        🎯
+                    </div>
+
+                    <div
+                        id="gameCostText"
+                        class="game-cost"
+                    >
+                        🎁 今日の無料プレイが使えます！
+                    </div>
+
+                    <button
+                        id="startGameButton"
+                        class="game-button"
+                    >
+                        START
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="gamePlayArea"
+                    class="game-area hidden"
+                >
+
+                    <div class="game-message">
+                        中央でSTOP！
+                    </div>
+
+
+                    <div class="timing-bar">
+
+                        <div
+                            id="goodZoneLeft"
+                            class="good-zone"
+                        ></div>
+
+                        <div
+                            id="greatZoneLeft"
+                            class="great-zone"
+                        ></div>
+
+                        <div
+                            id="perfectZone"
+                            class="perfect-zone"
+                        ></div>
+
+                        <div
+                            id="greatZoneRight"
+                            class="great-zone"
+                        ></div>
+
+                        <div
+                            id="goodZoneRight"
+                            class="good-zone"
+                        ></div>
+
+                        <div
+                            id="cursor"
+                            class="cursor"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="zone-explanation">
+
+                        <span class="good-label">
+                            GOOD
+                        </span>
+
+                        <span class="great-label">
+                            GREAT
+                        </span>
+
+                        <span class="perfect-label">
+                            PERFECT
+                        </span>
+
+                        <span class="great-label">
+                            GREAT
+                        </span>
+
+                        <span class="good-label">
+                            GOOD
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        id="stopGameButton"
+                        class="game-button stop-button"
+                    >
+                        STOP！
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="gameResultArea"
+                    class="game-area hidden"
+                >
+
+                    <div
+                        id="gameResult"
+                        class="game-result"
+                    >
+                    </div>
+
+                    <div
+                        id="gameReward"
+                        class="game-reward"
+                    >
+                    </div>
+
+                    <button
+                        id="retryGameButton"
+                        class="game-button"
+                    >
+                        もう一度
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             ハイ＆ロー
+        =============================== -->
+
+        <div
+            id="highLowGame"
+            class="minigame-content"
+        >
+
+            <div class="minigame-card">
+
+                <div class="game-title">
+                    🃏 ハイ＆ロー
+                </div>
+
+                <div class="game-description">
+                    次のカードがHIGHかLOWか予想しよう！
+                </div>
+
+
+                <div
+                    id="highLowStartArea"
+                    class="game-area"
+                >
+
+                    <div class="high-low-start-icon">
+                        🃏
+                    </div>
+
+                    <div class="game-cost">
+                        参加料：10コイン
+                    </div>
+
+                    <button
+                        id="startHighLowButton"
+                        class="game-button"
+                    >
+                        START
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="highLowPlayArea"
+                    class="game-area hidden"
+                >
+
+                    <div class="high-low-pot">
+
+                        現在の賞金
+
+                        <strong>
+                            <span id="highLowReward">
+                                10
+                            </span>
+                            コイン
+                        </strong>
+
+                    </div>
+
+
+                    <div class="card-display">
+
+                        <div
+                            id="currentCard"
+                            class="playing-card"
+                        >
+                            A
+                        </div>
+
+                    </div>
+
+
+                    <div class="high-low-question">
+                        次のカードは？
+                    </div>
+
+
+                    <div class="high-low-buttons">
+
+                        <button
+                            id="lowButton"
+                            class="high-low-button low"
+                        >
+                            LOW
+                        </button>
+
+                        <button
+                            id="highButton"
+                            class="high-low-button high"
+                        >
+                            HIGH
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        id="cashOutButton"
+                        class="cash-out-button"
+                    >
+                        💰 CASH OUT
+                    </button>
+
+
+                    <div class="small-note">
+                        正解するごとに20コイン獲得。
+                        <br>
+                        勝負師装備中は40コイン。
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="highLowResultArea"
+                    class="game-area hidden"
+                >
+
+                    <div
+                        id="highLowResult"
+                        class="game-result"
+                    >
+                    </div>
+
+                    <div
+                        id="highLowResultReward"
+                        class="game-reward"
+                    >
+                    </div>
+
+
+                    <div
+                        id="highLowFailureInfo"
+                        class="high-low-failure-info hidden"
+                    >
+
+                        <div class="failure-title">
+                            📋 今回の結果
+                        </div>
+
+
+                        <div class="failure-cards">
+
+                            <div class="failure-card">
+
+                                <span>
+                                    前のカード
+                                </span>
+
+                                <strong
+                                    id="failurePreviousCard"
+                                >
+                                </strong>
+
+                            </div>
+
+
+                            <div class="failure-arrow">
+                                →
+                            </div>
+
+
+                            <div class="failure-card">
+
+                                <span>
+                                    次のカード
+                                </span>
+
+                                <strong
+                                    id="failureNextCard"
+                                >
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="failureReason"
+                            class="failure-reason"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="retryHighLowButton"
+                        class="game-button"
+                    >
+                        もう一度
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             数字記憶
+        =============================== -->
+
+        <div
+            id="memoryGame"
+            class="minigame-content"
+        >
+
+            <div class="minigame-card">
+
+                <div class="game-title">
+                    🧠 数字記憶
+                </div>
+
+                <div class="game-description">
+                    一瞬だけ表示される数字を覚えよう！
+                </div>
+
+
+                <div
+                    id="memorySelectArea"
+                    class="game-area"
+                >
+
+                    <div class="memory-section-title">
+                        桁数を選択
+                    </div>
+
+
+                    <div class="digit-buttons">
+
+                        <button
+                            class="digit-button"
+                            data-digits="3"
+                        >
+                            3桁
+                            <small>30コイン</small>
+                        </button>
+
+                        <button
+                            class="digit-button"
+                            data-digits="4"
+                        >
+                            4桁
+                            <small>50コイン</small>
+                        </button>
+
+                        <button
+                            class="digit-button"
+                            data-digits="5"
+                        >
+                            5桁
+                            <small>70コイン</small>
+                        </button>
+
+                        <button
+                            class="digit-button"
+                            data-digits="6"
+                        >
+                            6桁
+                            <small>100コイン</small>
+                        </button>
+
+                        <button
+                            class="digit-button"
+                            data-digits="7"
+                        >
+                            7桁
+                            <small>150コイン</small>
+                        </button>
+
+                        <button
+                            class="digit-button"
+                            data-digits="8"
+                        >
+                            8桁
+                            <small>200コイン</small>
+                        </button>
+
+                    </div>
+
+
+                    <div class="memory-entry-cost">
+                        参加料：10コイン
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="memoryDisplayArea"
+                    class="game-area hidden"
+                >
+
+                    <div class="memory-info">
+                        この数字を覚えてください！
+                    </div>
+
+                    <div
+                        id="memoryNumber"
+                        class="memory-number"
+                    >
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="memoryInputArea"
+                    class="game-area hidden"
+                >
+
+                    <div class="memory-info">
+                        数字を入力してください
+                    </div>
+
+
+                    <div
+                        id="memoryInputDisplay"
+                        class="memory-input-display"
+                    >
+                        _
+                    </div>
+
+
+                    <div class="calculator">
+
+                        <button data-key="1">
+                            1
+                        </button>
+
+                        <button data-key="2">
+                            2
+                        </button>
+
+                        <button data-key="3">
+                            3
+                        </button>
+
+                        <button data-key="4">
+                            4
+                        </button>
+
+                        <button data-key="5">
+                            5
+                        </button>
+
+                        <button data-key="6">
+                            6
+                        </button>
+
+                        <button data-key="7">
+                            7
+                        </button>
+
+                        <button data-key="8">
+                            8
+                        </button>
+
+                        <button data-key="9">
+                            9
+                        </button>
+
+                        <button
+                            class="clear-key"
+                            data-key="clear"
+                        >
+                            C
+                        </button>
+
+                        <button data-key="0">
+                            0
+                        </button>
+
+                        <button
+                            class="enter-key"
+                            data-key="enter"
+                        >
+                            決定
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="memoryResultArea"
+                    class="game-area hidden"
+                >
+
+                    <div
+                        id="memoryResult"
+                        class="game-result"
+                    >
+                    </div>
+
+                    <div
+                        id="memoryResultReward"
+                        class="game-reward"
+                    >
+                    </div>
+
+
+                    <button
+                        id="retryMemoryButton"
+                        class="game-button"
+                    >
+                        もう一度
+                    </button>
+
+                </div>
+
             </div>
 
 
-            <p class="game-description">
-                動いているカーソルを<br>
-                緑のゾーンで止めよう！
-            </p>
+            <div class="mini-game-stats">
+
+                <div class="game-stats">
+
+                    <span>
+                        🎮 ミニゲーム累計
+                    </span>
+
+                    <strong>
+                        <span id="miniGameCoins">
+                            0
+                        </span>
+                        コイン
+                    </strong>
+
+                </div>
 
 
-            <div class="daily-free">
+                <div class="game-stats">
 
-                🎁 今日の無料プレイ：
-                <span id="dailyFreeStatus">
-                    使用可能
+                    <span>
+                        🏆 ミニゲーム最高
+                    </span>
+
+                    <strong>
+                        <span id="miniGameBest">
+                            0
+                        </span>
+                        コイン
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         タイムアタック
+    ========================================== -->
+
+    <section
+        id="timeAttackScreen"
+        class="screen"
+    >
+
+        <div class="time-attack-header">
+
+            <div class="time-attack-title">
+                ⏱️ タイムアタック
+            </div>
+
+            <div class="t-coin-display">
+                🪙
+                <span id="tCoins">
+                    0
                 </span>
+                T
+            </div>
+
+        </div>
+
+
+        <!-- タイムアタック中 -->
+
+        <div
+            id="timeAttackPlayArea"
+            class="hidden"
+        >
+
+            <div class="time-attack-status">
+
+                <div>
+
+                    <span id="timeAttackModeName">
+                        チャレンジ
+                    </span>
+
+                </div>
+
+
+                <div class="ta-timer">
+                    ⏱️
+                    <span id="timeAttackTimer">
+                        00:00.00
+                    </span>
+                </div>
+
+
+                <div class="ta-coins">
+                    💰
+                    <span id="timeAttackCoins">
+                        0
+                    </span>
+                </div>
 
             </div>
 
 
             <div
-                id="gameStartArea"
-                class="game-area"
+                id="timeAttackGoal"
+                class="time-attack-goal"
+            >
+                10,000コインまであと
+                <strong>
+                    <span id="timeAttackRemaining">
+                        10000
+                    </span>
+                </strong>
+                コイン
+            </div>
+
+
+            <div class="ta-game-tabs">
+
+                <button
+                    class="ta-game-tab active"
+                    data-ta-game="taSlot"
+                >
+                    🎰
+                    <span>スロット</span>
+                </button>
+
+                <button
+                    class="ta-game-tab"
+                    data-ta-game="taTiming"
+                >
+                    🎯
+                    <span>タイミング</span>
+                </button>
+
+                <button
+                    class="ta-game-tab"
+                    data-ta-game="taHighLow"
+                >
+                    🃏
+                    <span>ハイ＆ロー</span>
+                </button>
+
+                <button
+                    class="ta-game-tab"
+                    data-ta-game="taMemory"
+                >
+                    🧠
+                    <span>数字記憶</span>
+                </button>
+
+            </div>
+
+
+            <!-- TA スロット -->
+
+            <div
+                id="taSlot"
+                class="ta-game-content active"
             >
 
-                <div class="game-icon">
-                    🎯
+                <div class="machine">
+
+                    <div class="reels">
+
+                        <div
+                            id="taReel1"
+                            class="reel"
+                        >
+                            🍒
+                        </div>
+
+                        <div
+                            id="taReel2"
+                            class="reel"
+                        >
+                            🍋
+                        </div>
+
+                        <div
+                            id="taReel3"
+                            class="reel"
+                        >
+                            ⭐
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="taSlotResult"
+                        class="result"
+                    >
+                        START！
+                    </div>
+
+
+                    <button
+                        id="taSpinButton"
+                        class="ta-action-button"
+                    >
+                        SPIN
+                    </button>
+
+
+                    <div class="info">
+                        1回 50コイン
+                    </div>
+
                 </div>
 
+            </div>
 
-                <div
-                    id="gameCostText"
-                    class="game-cost"
-                >
-                    無料でプレイできます！
+
+            <!-- TA タイミング -->
+
+            <div
+                id="taTiming"
+                class="ta-game-content"
+            >
+
+                <div class="minigame-card">
+
+                    <div class="game-title">
+                        🎯 タイミング
+                    </div>
+
+
+                    <div class="timing-bar">
+
+                        <div
+                            id="taGoodZoneLeft"
+                            class="good-zone"
+                        ></div>
+
+                        <div
+                            id="taGreatZoneLeft"
+                            class="great-zone"
+                        ></div>
+
+                        <div
+                            id="taPerfectZone"
+                            class="perfect-zone"
+                        ></div>
+
+                        <div
+                            id="taGreatZoneRight"
+                            class="great-zone"
+                        ></div>
+
+                        <div
+                            id="taGoodZoneRight"
+                            class="good-zone"
+                        ></div>
+
+                        <div
+                            id="taCursor"
+                            class="cursor"
+                        ></div>
+
+                    </div>
+
+
+                    <div
+                        id="taTimingMessage"
+                        class="game-message"
+                    >
+                        STARTを押してください
+                    </div>
+
+
+                    <button
+                        id="taTimingStartButton"
+                        class="game-button"
+                    >
+                        START
+                    </button>
+
+
+                    <button
+                        id="taTimingStopButton"
+                        class="game-button stop-button hidden"
+                    >
+                        STOP！
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TA ハイロー -->
+
+            <div
+                id="taHighLow"
+                class="ta-game-content"
+            >
+
+                <div class="minigame-card">
+
+                    <div class="game-title">
+                        🃏 ハイ＆ロー
+                    </div>
+
+
+                    <div class="high-low-pot">
+
+                        1回成功：
+                        <strong>
+                            <span id="taHighLowReward">
+                                20
+                            </span>
+                            コイン
+                        </strong>
+
+                    </div>
+
+
+                    <div class="card-display">
+
+                        <div
+                            id="taCurrentCard"
+                            class="playing-card"
+                        >
+                            A
+                        </div>
+
+                    </div>
+
+
+                    <div class="high-low-buttons">
+
+                        <button
+                            id="taLowButton"
+                            class="high-low-button low"
+                        >
+                            LOW
+                        </button>
+
+                        <button
+                            id="taHighButton"
+                            class="high-low-button high"
+                        >
+                            HIGH
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        id="taHighLowStartButton"
+                        class="game-button"
+                    >
+                        START
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TA 数字記憶 -->
+
+            <div
+                id="taMemory"
+                class="ta-game-content"
+            >
+
+                <div class="minigame-card">
+
+                    <div class="game-title">
+                        🧠 数字記憶
+                    </div>
+
+
+                    <div
+                        id="taMemorySelect"
+                        class="game-area"
+                    >
+
+                        <div class="digit-buttons">
+
+                            <button
+                                class="ta-memory-button"
+                                data-ta-digits="3"
+                            >
+                                3桁
+                                <small>
+                                    +30
+                                </small>
+                            </button>
+
+                            <button
+                                class="ta-memory-button"
+                                data-ta-digits="4"
+                            >
+                                4桁
+                                <small>
+                                    +50
+                                </small>
+                            </button>
+
+                            <button
+                                class="ta-memory-button"
+                                data-ta-digits="5"
+                            >
+                                5桁
+                                <small>
+                                    +70
+                                </small>
+                            </button>
+
+                            <button
+                                class="ta-memory-button"
+                                data-ta-digits="6"
+                            >
+                                6桁
+                                <small>
+                                    +100
+                                </small>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="taMemoryDisplay"
+                        class="game-area hidden"
+                    >
+
+                        <div
+                            id="taMemoryNumber"
+                            class="memory-number"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="taMemoryInput"
+                        class="game-area hidden"
+                    >
+
+                        <div
+                            id="taMemoryInputDisplay"
+                            class="memory-input-display"
+                        >
+                            _
+                        </div>
+
+
+                        <div class="calculator">
+
+                            <button data-ta-key="1">
+                                1
+                            </button>
+
+                            <button data-ta-key="2">
+                                2
+                            </button>
+
+                            <button data-ta-key="3">
+                                3
+                            </button>
+
+                            <button data-ta-key="4">
+                                4
+                            </button>
+
+                            <button data-ta-key="5">
+                                5
+                            </button>
+
+                            <button data-ta-key="6">
+                                6
+                            </button>
+
+                            <button data-ta-key="7">
+                                7
+                            </button>
+
+                            <button data-ta-key="8">
+                                8
+                            </button>
+
+                            <button data-ta-key="9">
+                                9
+                            </button>
+
+                            <button
+                                class="clear-key"
+                                data-ta-key="clear"
+                            >
+                                C
+                            </button>
+
+                            <button data-ta-key="0">
+                                0
+                            </button>
+
+                            <button
+                                class="enter-key"
+                                data-ta-key="enter"
+                            >
+                                決定
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="timeAttackQuitButton"
+                class="ta-quit-button"
+            >
+                タイムアタックを終了
+            </button>
+
+        </div>
+
+
+
+        <!-- タイムアタック選択 -->
+
+        <div
+            id="timeAttackStartArea"
+        >
+
+            <div class="ta-intro">
+
+                <div class="ta-big-icon">
+                    ⏱️
+                </div>
+
+                <h2>
+                    タイムアタック
+                </h2>
+
+                <p>
+                    普段のコインとは別の<br>
+                    <strong>0コイン</strong>からスタートします。
+                </p>
+
+            </div>
+
+
+            <div class="ta-mode-card">
+
+                <div class="ta-mode-icon">
+                    🏆
+                </div>
+
+                <div class="ta-mode-info">
+
+                    <h3>
+                        1万コインチャレンジ
+                    </h3>
+
+                    <p>
+                        0コインから10,000コインを<br>
+                        どれだけ速く集められるか挑戦！
+                    </p>
+
+                    <div class="ta-record">
+                        ベスト：
+                        <strong id="best10kTime">
+                            --:--.--
+                        </strong>
+                    </div>
+
                 </div>
 
 
                 <button
-                    id="startGameButton"
-                    class="game-button"
+                    id="start10kButton"
+                    class="ta-start-button"
                 >
                     START
                 </button>
@@ -165,69 +1337,101 @@
             </div>
 
 
+            <div class="ta-mode-card">
 
-            <div
-                id="gamePlayArea"
-                class="game-area hidden"
-            >
-
-                <div class="timing-bar">
-
-                    <div
-                        id="perfectZone"
-                        class="perfect-zone"
-                    ></div>
-
-                    <div
-                        id="cursor"
-                        class="cursor"
-                    ></div>
-
+                <div class="ta-mode-icon">
+                    ⏱️
                 </div>
 
+                <div class="ta-mode-info">
 
-                <div class="game-message">
-                    緑のゾーンでSTOP！
+                    <h3>
+                        10分チャレンジ
+                    </h3>
+
+                    <p>
+                        10分間でどれだけコインを<br>
+                        集められるか挑戦！
+                    </p>
+
+                    <div class="ta-record">
+                        ベスト：
+                        <strong id="best10minCoins">
+                            0コイン
+                        </strong>
+                    </div>
+
                 </div>
 
 
                 <button
-                    id="stopGameButton"
-                    class="game-button stop-button"
+                    id="start10minButton"
+                    class="ta-start-button"
                 >
-                    STOP
+                    START
                 </button>
 
             </div>
 
 
+            <div class="t-coin-panel">
 
-            <div
-                id="gameResultArea"
-                class="game-area hidden"
-            >
-
-                <div
-                    id="gameResult"
-                    class="game-result"
-                >
-                    GREAT!
+                <div>
+                    🪙 Tコイン
                 </div>
 
+                <strong id="tCoinsPanel">
+                    0
+                </strong>
 
-                <div
-                    id="gameReward"
-                    class="game-reward"
-                >
-                    +30コイン
+                <p>
+                    タイムアタックを完走すると<br>
+                    1Tコイン獲得！
+                </p>
+
+            </div>
+
+
+            <div class="ta-buff-expansion">
+
+                <h3>
+                    ⚡ バフ装備枠
+                </h3>
+
+                <div>
+                    現在：
+                    <strong id="buffSlotCount">
+                        2
+                    </strong>
+                    枠
+                </div>
+
+                <div class="next-slot">
+                    次の拡張：
+                    <strong>
+                        <span id="nextBuffSlotCount">
+                            3
+                        </span>
+                        枠
+                    </strong>
+
+                    <br>
+
+                    必要：
+                    <strong>
+                        <span id="nextBuffSlotCost">
+                            5
+                        </span>
+                        T
+                    </strong>
                 </div>
 
 
                 <button
-                    id="retryGameButton"
-                    class="game-button"
+                    id="expandBuffButton"
+                    class="expand-buff-button"
                 >
-                    もう一回
+                    Tコインで拡張
                 </button>
 
             </div>
@@ -235,81 +1439,167 @@
         </div>
 
 
-        <div class="game-stats">
-            🎮 ミニゲーム累計獲得コイン
-            <span id="miniGameCoins">0</span>
-        </div>
+        <!-- タイムアタック結果 -->
+
+        <div
+            id="timeAttackResultArea"
+            class="ta-result-area hidden"
+        >
+
+            <div class="ta-result-icon">
+                🎉
+            </div>
+
+            <div
+                id="taResultTitle"
+                class="ta-result-title"
+            >
+                COMPLETE!
+            </div>
 
 
-        <div class="game-stats">
-            🏆 ミニゲーム最高記録
-            <span id="miniGameBest">0</span>
+            <div
+                id="taResultScore"
+                class="ta-result-score"
+            >
+            </div>
+
+
+            <div class="ta-t-coin-reward">
+                🪙 +1 Tコイン！
+            </div>
+
+
+            <button
+                id="taBackButton"
+                class="game-button"
+            >
+                タイムアタック画面へ
+            </button>
+
         </div>
 
     </section>
 
 
 
-    <!-- =========================
-         バフ
-    ========================== -->
+    <!-- =========================================
+         バフ画面
+    ========================================== -->
 
     <section
         id="buffScreen"
         class="screen"
     >
 
-        <h1>⚡ バフ</h1>
-
-
         <div class="buff-header">
 
-            <div>
-                装備枠
-            </div>
+            <span>
+                ⚡ 装備枠
+            </span>
 
-            <div>
-                <span id="equippedCount">0</span>
-                / 2
-            </div>
+            <span>
+                <span id="equippedCount">
+                    0
+                </span>
+                /
+                <span id="buffSlotMax">
+                    2
+                </span>
+            </span>
 
         </div>
 
 
-        <p class="buff-explanation">
-            バフは購入しただけでは効果がありません。<br>
-            装備したバフだけが発動します。
-        </p>
+        <div class="buff-explanation">
+
+            バフを購入して装備すると
+            <br>
+            ゲームを有利にできます。
+
+        </div>
 
 
-        <!-- 装備中 -->
+        <div class="buff-tabs">
 
-        <div class="buff-section">
-
-            <h2>
-                ⚡ 装備中
-            </h2>
-
-            <div
-                id="equippedBuffs"
-                class="equipped-buffs"
+            <button
+                class="buff-tab active"
+                data-buff-tab="allBuffs"
             >
-            </div>
+                ✨
+                <span>すべて</span>
+            </button>
+
+            <button
+                class="buff-tab"
+                data-buff-tab="slotBuffs"
+            >
+                🎰
+                <span>スロット</span>
+            </button>
+
+            <button
+                class="buff-tab"
+                data-buff-tab="miniBuffs"
+            >
+                🎮
+                <span>ゲーム</span>
+            </button>
+
+            <button
+                class="buff-tab"
+                data-buff-tab="otherBuffs"
+            >
+                🌟
+                <span>その他</span>
+            </button>
 
         </div>
 
 
-
-        <!-- バフショップ -->
-
-        <div class="buff-section">
-
-            <h2>
-                🛒 バフショップ
-            </h2>
+        <div
+            id="equippedBuffs"
+            class="equipped-buffs"
+        >
+        </div>
 
 
-            <div id="buffList"></div>
+        <div
+            id="allBuffs"
+            class="buff-content active"
+        >
+
+            <div id="allBuffList"></div>
+
+        </div>
+
+
+        <div
+            id="slotBuffs"
+            class="buff-content"
+        >
+
+            <div id="slotBuffList"></div>
+
+        </div>
+
+
+        <div
+            id="miniBuffs"
+            class="buff-content"
+        >
+
+            <div id="miniGameBuffList"></div>
+
+        </div>
+
+
+        <div
+            id="otherBuffs"
+            class="buff-content"
+        >
+
+            <div id="otherBuffList"></div>
 
         </div>
 
@@ -317,56 +1607,131 @@
 
 
 
-    <!-- =========================
-         設定
-    ========================== -->
+    <!-- =========================================
+         設定画面
+    ========================================== -->
 
     <section
         id="settingsScreen"
         class="screen"
     >
 
-        <h1>⚙️ 設定</h1>
-
-
         <div class="settings-panel">
 
             <h2>
-                📊 ゲーム情報
+                📊 ゲーム記録
             </h2>
 
 
             <div class="setting-info">
-                <span>💰 現在のコイン</span>
-                <span id="settingsCoins">0</span>
+
+                <span>
+                    💰 コイン
+                </span>
+
+                <strong id="settingsCoins">
+                    0
+                </strong>
+
             </div>
 
 
             <div class="setting-info">
-                <span>🏆 最高コイン</span>
-                <span id="settingsBestCoins">0</span>
+
+                <span>
+                    🏆 最高コイン
+                </span>
+
+                <strong id="settingsBestCoins">
+                    0
+                </strong>
+
             </div>
 
 
             <div class="setting-info">
-                <span>🎯 ミニゲーム累計</span>
-                <span id="settingsMiniGameCoins">0</span>
+
+                <span>
+                    🎮 ミニゲーム累計
+                </span>
+
+                <strong id="settingsMiniGameCoins">
+                    0
+                </strong>
+
             </div>
 
 
             <div class="setting-info">
-                <span>🏆 ミニゲーム最高</span>
-                <span id="settingsMiniGameBest">0</span>
+
+                <span>
+                    🏆 ミニゲーム最高
+                </span>
+
+                <strong id="settingsMiniGameBest">
+                    0
+                </strong>
+
             </div>
 
         </div>
 
 
+        <div class="settings-panel">
+
+            <h2>
+                ⏱️ タイムアタック
+            </h2>
+
+
+            <div class="setting-info">
+
+                <span>
+                    🪙 Tコイン
+                </span>
+
+                <strong id="settingsTCoins">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <span>
+                    🏆 1万コイン
+                </span>
+
+                <strong id="settingsBest10k">
+                    --:--.--
+                </strong>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <span>
+                    ⏱️ 10分最高
+                </span>
+
+                <strong>
+                    <span id="settingsBest10min">
+                        0
+                    </span>
+                    コイン
+                </strong>
+
+            </div>
+
+        </div>
+
 
         <div class="settings-panel">
 
             <h2>
-                🗑️ ゲームデータ
+                ⚠️ データ
             </h2>
 
 
@@ -374,11 +1739,12 @@
                 id="resetDataButton"
                 class="setting-button danger"
             >
-                🔄 データをリセット
+                ゲームデータをリセット
 
                 <span>
-                    コイン・記録などを初期化
+                    コイン・バフなどをリセットします
                 </span>
+
             </button>
 
 
@@ -386,35 +1752,13 @@
                 id="restartGameButton"
                 class="setting-button restart"
             >
-                🆕 最初からやり直す
+                最初からやり直す
 
                 <span>
-                    すべてのゲームデータを削除
+                    すべてのデータを完全に削除します
                 </span>
+
             </button>
-
-        </div>
-
-
-
-        <div class="settings-panel">
-
-            <h2>
-                その他
-            </h2>
-
-
-            <div class="setting-info">
-
-                <span>
-                    🎰 気休めスロット
-                </span>
-
-                <span>
-                    Version 1.1
-                </span>
-
-            </div>
 
         </div>
 
@@ -422,53 +1766,87 @@
 
 
 
-    <!-- =========================
-         ナビゲーション
-    ========================== -->
-
-    <nav class="navigation">
+</div>
 
 
-        <button
-            class="nav-button active"
-            data-screen="slotScreen"
-        >
-            <span class="nav-icon">🎰</span>
-            <span>スロット</span>
-        </button>
+
+<!-- =========================================
+     ナビゲーション
+========================================== -->
+
+<nav class="navigation">
+
+    <button
+        class="nav-button active"
+        data-screen="slotScreen"
+    >
+
+        <span class="nav-icon">
+            🎰
+        </span>
+
+        スロット
+
+    </button>
 
 
-        <button
-            class="nav-button"
-            data-screen="gameScreen"
-        >
-            <span class="nav-icon">🎮</span>
-            <span>ゲーム</span>
-        </button>
+    <button
+        class="nav-button"
+        data-screen="miniGameScreen"
+    >
+
+        <span class="nav-icon">
+            🎮
+        </span>
+
+        ミニゲーム
+
+    </button>
 
 
-        <button
-            class="nav-button"
-            data-screen="buffScreen"
-        >
-            <span class="nav-icon">⚡</span>
-            <span>バフ</span>
-        </button>
+    <button
+        class="nav-button"
+        data-screen="timeAttackScreen"
+    >
+
+        <span class="nav-icon">
+            ⏱️
+        </span>
+
+        タイムアタック
+
+    </button>
 
 
-        <button
-            class="nav-button"
-            data-screen="settingsScreen"
-        >
-            <span class="nav-icon">⚙️</span>
-            <span>設定</span>
-        </button>
+    <button
+        class="nav-button"
+        data-screen="buffScreen"
+    >
+
+        <span class="nav-icon">
+            ⚡
+        </span>
+
+        バフ
+
+    </button>
 
 
-    </nav>
+    <button
+        class="nav-button"
+        data-screen="settingsScreen"
+    >
 
+        <span class="nav-icon">
+            ⚙️
+        </span>
 
-</main>
+        設定
+
+    </button>
+
+</nav>
+
 
 
 <script src="script.js"></script>
