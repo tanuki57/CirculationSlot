@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101225">
+  <meta name="description" content="スロット、ミニゲーム、タイムアタックに挑戦するスマホ向けアーケードゲーム。">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>気休めスロット</title>
+</head>
+<body>
+<main class="app">
+  <div id="jackpotOverlay" class="jackpot-overlay" aria-live="assertive" aria-hidden="true"><div class="jackpot-overlay-card"><span id="jackpotOverlaySymbol">⭐</span><strong id="jackpotOverlayAmount">+2,000コイン！</strong></div></div>
+  <header class="topbar">
+    <a class="brand" href="#slot" aria-label="気休めスロット ホーム"><span>ARCADE / LUCKY</span><strong>気休めスロット</strong></a>
+    <div class="wallet"><span>💰 <b id="coins">0</b></span><span>🎁 <b id="freeSpins">3</b></span><span>🪙 <b id="tCoins">0</b></span></div>
+  </header>
+
+  <aside id="taBanner" class="ta-banner hidden" aria-live="polite">
+    <div class="ta-banner-head"><div><small>TA中 · TIME ATTACK</small><strong id="taName">🏆 10000コインTA</strong></div><button id="taEnd" class="danger small">終了</button></div>
+    <div class="ta-stats"><span>TAコイン <b id="taCoins">10</b></span><span>無料SPIN <b id="taFree">3</b></span><span>⏱ <b id="taClock">0.0秒</b></span></div>
+    <div class="progress"><i id="taProgress"></i></div>
+  </aside>
+
+  <section id="slotView" class="view active">
+    <div class="hero"><small>LUCK IS ON YOUR SIDE</small><div class="hero-icon">🎰</div><h1>気休めスロット</h1><p>気軽に回して、運試し。</p></div>
+    <article class="panel machine">
+      <div class="section-title"><div><small>MAIN MACHINE</small><h2>通常スロット</h2></div><span class="pill">1回 <b id="spinCost">50</b> コイン</span></div>
+      <div class="reels"><div id="reel0" class="reel">🍒</div><div id="reel1" class="reel">🍋</div><div id="reel2" class="reel">⭐</div></div>
+      <p id="slotResult" class="result">SPINを押してスタート！</p>
+      <button id="spin" class="primary spin-button">SPIN</button>
+      <div id="doubleUpControls" class="double-up-controls hidden"><p id="doubleUpPrompt" class="muted center">報酬をダブルアップに挑戦する？</p><div class="choice-row"><button id="doubleUpContinue" class="primary">🎲 続ける</button><button id="doubleUpCollect" class="secondary">💰 受け取る</button></div></div>
+      <p class="muted center">同じ絵柄が3つ揃うとコイン獲得</p>
+    </article>
+    <article class="panel bonus-feature">
+      <div class="section-title"><div><small>UNLOCK AT 10,000</small><h2>🎲 ダブルアップ</h2></div><span id="doubleUpStatus" class="pill">🔒 最高コイン1万で解放</span></div>
+      <p class="muted">通常スロットの当たり後に挑戦できます。成功率50%。成功で報酬が倍になり、失敗すると今回の報酬を失います。</p>
+    </article>
+    <article class="panel bonus-feature">
+      <div class="section-title"><div><small>UNLOCK AT 30,000</small><h2>🎡 ボーナスリール</h2></div><span id="bonusReelStatus" class="pill">🔒 最高コイン3万で解放</span></div>
+      <p class="muted">解放後は通常スロットの当たり時に追加抽選。×2・×3・ハズレの絵柄で今回の報酬が決まります。</p>
+      <div id="bonusReelDisplay" class="bonus-reel-display hidden">?</div><p id="bonusReelResult" class="result"></p>
+    </article>
+    <article class="panel bonus-feature">
+      <div class="section-title"><div><small>UNLOCK AT 50,000</small><h2>🛑 3つ揃えるチャレンジ</h2></div><span id="stopChallengeStatus" class="pill">🔒 最高コイン5万で解放</span></div>
+      <p class="muted">掛け金を払って3本のリールを順番に止めます。同じ絵柄が揃えば通常スロットと同じ報酬を獲得。</p>
+      <div class="reels"><div id="challengeReel0" class="reel">🍒</div><div id="challengeReel1" class="reel">🍋</div><div id="challengeReel2" class="reel">⭐</div></div>
+      <p id="stopChallengeResult" class="result">3リールチャレンジはロック中です。</p>
+      <button id="stopChallengeStart" class="primary full hidden">チャレンジ開始</button>
+      <div id="stopChallengeControls" class="choice-row hidden"><button data-stop="0" class="secondary">1本目を止める</button><button data-stop="1" class="secondary">2本目を止める</button><button data-stop="2" class="secondary">3本目を止める</button></div>
+    </article>
+  </section>
+
+  <section id="gamesView" class="view">
+    <div class="page-heading"><small>ARCADE</small><h1>ミニゲーム</h1><p>遊んでコインやTA報酬を獲得。</p></div>
+    <div class="game-tabs"><button class="active" data-game="timing">🎯 タイミング</button><button data-game="highlow">🃏 ハイ＆ロー</button><button data-game="memory">🧠 数字記憶</button></div>
+    <article id="timingGame" class="panel game-panel">
+      <div class="section-title"><div><small>STOP AT THE CENTER</small><h2>タイミングストップ</h2></div><span class="pill" id="timingCost">今日の無料プレイ</span></div>
+      <div id="timingStartArea"><p class="muted">動くカーソルを緑のPERFECTゾーンで止めよう。</p><button id="timingStart" class="primary full">スタート</button></div>
+      <div id="timingPlayArea" class="hidden"><div class="timing-track"><span class="timing-label timing-miss-left">MISS</span><span class="timing-label timing-good-left">GOOD</span><span class="timing-label timing-great-left">GREAT</span><span class="timing-label timing-perfect">PERFECT</span><span class="timing-label timing-great-right">GREAT</span><span class="timing-label timing-good-right">GOOD</span><span class="timing-label timing-miss-right">MISS</span><i></i></div><div class="timing-legend"><span><i class="legend-miss"></i>MISS</span><span><i class="legend-good"></i>GOOD</span><span><i class="legend-great"></i>GREAT</span><span><i class="legend-perfect"></i>PERFECT</span></div><button id="timingStop" class="primary full">STOP!</button></div>
+      <p id="timingResult" class="result"></p>
+    </article>
+    <article id="highlowGame" class="panel game-panel hidden">
+      <div class="section-title"><div><small>GUESS THE NEXT CARD</small><h2>ハイ＆ロー</h2></div><span class="pill">参加料 <b id="highLowCost">10</b></span></div>
+      <div id="hlStart"><p class="muted">次のカードが高いか低いか予想。続けるほど賞金アップ！</p><button id="hlBegin" class="primary full">スタート</button></div>
+      <div id="hlPlay" class="hidden"><div class="playing-card" id="card">7</div><p class="center">次はどっち？　賞金 <b id="pot">20</b></p><div class="choice-row"><button id="low">LOW</button><button id="high">HIGH</button></div><button id="cashOut" class="secondary full">💰 CASH OUT</button></div>
+      <p id="hlResult" class="result"></p>
+    </article>
+    <article id="memoryGame" class="panel game-panel hidden">
+      <div class="section-title"><div><small>REMEMBER THE NUMBER</small><h2>数字記憶</h2></div><span class="pill">参加料 <b id="memoryCost">10</b></span></div>
+      <div id="memoryStart"><p class="muted">桁数を選んで数字を覚えよう。</p><div class="choice-row digit-row"><button data-digits="3">3桁<small>+30</small></button><button data-digits="4">4桁<small>+50</small></button><button data-digits="5">5桁<small>+70</small></button><button data-digits="6">6桁<small>+100</small></button><button data-digits="7">7桁<small>+150</small></button><button data-digits="8">8桁<small>+200</small></button></div></div>
+      <div id="memoryShow" class="hidden"><p class="muted center">数字を覚えて！</p><div id="memoryNumber" class="memory-number"></div></div>
+      <div id="memoryInputArea" class="hidden"><p id="memoryPrompt" class="muted center">数字を入力</p><div id="memoryInput" class="memory-number">_</div><div class="keypad" id="keypad"><button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key="clear">C</button><button data-key="0">0</button><button data-key="enter">OK</button></div></div>
+      <p id="memoryResult" class="result"></p>
+    </article>
+    <article class="panel"><div class="section-title"><div><small>YOUR RECORD</small><h2>ミニゲーム累計</h2></div></div><p>獲得コイン <b id="miniCoins">0</b>　最高 <b id="miniBest">0</b></p></article>
+  </section>
+
+  <section id="taView" class="view">
+    <div class="page-heading"><small>TIME ATTACK</small><h1>タイムアタック</h1><p>開始したらスロット画面のリールとSPINで挑戦。</p></div>
+    <article class="panel ta-mode"><div class="mode-icon">🏆</div><div><h2>10000コインTA</h2><p>TAコイン10枚から、1万枚到達までのタイムを競う。</p><button id="start10k" class="primary">TAスタート</button><p id="record10k" class="muted"></p></div></article>
+    <article class="panel ta-mode"><div class="mode-icon">⏱️</div><div><h2>10分コインTA</h2><p>TAコイン10枚から、10分間でどこまで増やせるか挑戦。</p><button id="start10min" class="primary">TAスタート</button><p id="record10min" class="muted"></p></div></article>
+    <article class="panel ta-mode"><div class="mode-icon">⌛</div><div><h2>5分コインTA</h2><p>TAコイン10枚から5分間挑戦。完走すると0.5 Tコイン獲得。</p><button id="start5min" class="primary">TAスタート</button><p id="record5min" class="muted"></p></div></article>
+    <article class="panel"><div class="section-title"><div><small>TA ARCADE</small><h2>TA中のミニゲーム</h2></div></div><p class="muted">TAを始めた後もミニゲーム画面へ移動できます。報酬は通常コインと分けてTAコインに加算されます。</p></article>
+  </section>
+
+  <section id="buffsView" class="view">
+    <div class="page-heading"><small>LOADOUT</small><h1>バフ・装備</h1><p>所持バフを装備してゲームを有利に進めよう。同系統の通常版と上位版を両方装備すると、効果がほどよく上乗せされます。</p></div>
+    <article class="panel"><div class="section-title"><h2>装備枠 <span id="equipCount">0</span>/<span id="equipSlots">2</span></h2><button id="expandSlots" class="secondary">枠+1 · <b id="slotExpandCost">1</b> T</button></div><div id="equipped" class="buff-list"></div></article>
+    <div id="buffList" class="buff-list"></div>
+  </section>
+
+  <section id="achievementsView" class="view">
+    <div class="page-heading"><small>COLLECTION</small><h1>実績</h1><p><b id="achievementCount">0</b> / <b id="achievementTotal">25</b> 達成</p></div>
+    <div id="achievementList" class="achievement-list"></div>
+  </section>
+
+  <section id="settingsView" class="view">
+    <div class="page-heading"><small>SAVE & BONUS</small><h1>設定</h1><p>データはこの端末のブラウザに保存されます。</p></div>
+    <article class="panel"><div class="section-title"><div><small>PAYTABLE</small><h2>1スピンごとの確率と報酬</h2></div></div><p class="muted">SPINを押すたびに1回抽選し、ハズレか絵柄の当たりが決まります。下表は通常時の1スピンあたりの確率と報酬です。</p><div class="table-scroll"><table class="paytable"><thead><tr><th>結果</th><th>通常確率</th><th>通常報酬</th><th>追加報酬</th></tr></thead><tbody id="paytableBody"></tbody></table></div><p class="muted">通常時の当たり確率は約16.16%。🍒🍋🍊は各5%、🔔1%、⭐0.1%、💎0.05%、7770.01%です。⭐・💎・777が当たると特別演出が出ます。</p></article>
+    <article class="panel"><div class="section-title"><div><small>7 DAY CYCLE</small><h2>ログインボーナス</h2></div><span>連続ログイン <b id="streak">1</b>日目</span></div><div class="login-grid" id="loginGrid"></div><p id="loginMessage" class="muted"></p></article>
+    <article class="panel"><div class="section-title"><h2>セーブデータ</h2></div><p>コイン <b id="settingsCoins">0</b>　最高 <b id="settingsBest">0</b>　Tコイン <b id="settingsT">0</b></p><button id="reset" class="danger full">データをリセット</button></article>
+    <footer><span>気休めスロット</span><span>v2.5.0 · GitHub Pages / PWA</span></footer>
+  </section>
+</main>
+<nav class="nav" aria-label="メインナビゲーション"><button class="active" data-view="slotView">🎰<span>スロット</span></button><button data-view="gamesView">🎮<span>ゲーム</span></button><button data-view="taView">⏱️<span>TA</span></button><button data-view="buffsView">⚡<span>バフ</span></button><button data-view="achievementsView">🏆<span>実績</span></button><button data-view="settingsView">⚙️<span>設定</span></button></nav>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js" defer></script>
+</body>
+</html>
